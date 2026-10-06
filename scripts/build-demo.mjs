@@ -1,0 +1,2 @@
+import {cp,mkdir,readFile,writeFile,rm} from 'node:fs/promises';
+await rm('.demo-build',{recursive:true,force:true});await mkdir('.demo-build',{recursive:true});await cp('public','.demo-build',{recursive:true});const html=await readFile('.demo-build/index.html','utf8');await writeFile('.demo-build/index.html',html.replace('data-mode="local"','data-mode="demo"'));await writeFile('.demo-build/.nojekyll','');console.log('Public browser-local demo built at .demo-build; no .env or data copied.');

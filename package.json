@@ -1,0 +1,1 @@
+{"name":"customer-agent-delivery-lab","version":"0.1.0","private":true,"type":"module","engines":{"node":">=24.0.0"},"scripts":{"start":"node src/server.mjs","test":"node --test tests/*.test.mjs","evaluate":"node scripts/evaluate.mjs","build:demo":"node scripts/build-demo.mjs","check":"node --check src/server.mjs && node --check public/app.mjs && node --check public/engine.mjs"}}

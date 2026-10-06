@@ -1,0 +1,6 @@
+import {release} from '../public/seed.mjs';
+import {runRegression} from '../public/evaluate.mjs';
+import {mkdir,writeFile} from 'node:fs/promises';
+const report=runRegression(release);await mkdir('docs/reports',{recursive:true});await writeFile('docs/reports/rule-regression.json',JSON.stringify(report,null,2));
+const md=`# 固定合成题集规则回归\n\n运行时间：${report.createdAt}。知识版本：${report.releaseId}。\n\n| 规则策略 | 通过 | 路由正确 | 无效来源案例 |\n|---|---|---|---|\n| 故意缺边界旧检索 | ${report.baseline.passed}/${report.baseline.total} | ${report.baseline.routingCorrect}/${report.baseline.total} | ${report.baseline.invalidCitationCases} |\n| 当前边界策略 | ${report.current.passed}/${report.current.total} | ${report.current.routingCorrect}/${report.current.total} | ${report.current.invalidCitationCases} |\n\n${report.rows.map(r=>`- ${r.id} ${r.question}：旧 ${r.baseline.pass?'通过':'失败'}；当前 ${r.current.pass?'通过':'失败'}。旧问题：${r.baseline.issues.join('；')||'无'}。当前问题：${r.current.issues.join('；')||'无'}。`).join('\n')}\n\n## 解释边界\n\n${report.limitations.map(x=>'- '+x).join('\n')}\n\n没有模型调用，没有模型质量提升结论。Tokens 和现金成本为未知，不能用 0 替代；本机规则运行也有人工与设备成本，未计价。原始逐题文本及来源位于同目录 JSON。\n`;
+await writeFile('docs/reports/rule-regression.md',md);console.log(JSON.stringify({baseline:report.baseline,current:report.current,kind:report.kind}));if(report.current.passed!==report.current.total)process.exitCode=1;

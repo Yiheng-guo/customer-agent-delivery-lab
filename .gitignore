@@ -1,0 +1,6 @@
+data/
+.env*
+node_modules/
+.demo-build/
+.runtime/
+*.log
