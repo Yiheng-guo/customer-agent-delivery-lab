@@ -9,6 +9,7 @@
 ## 先体验
 
 - 公开浏览器体验：https://yiheng-guo.github.io/customer-agent-delivery-lab/ （部署状态以 Pages / Actions 为准）
+- [中文操作演示视频：提问 → 来源 → 工单 → 回归 → 导出](https://yiheng-guo.github.io/customer-agent-delivery-lab/demo/)
 - 完整本机版：`http://127.0.0.1:4340`
 - [产品设计与验收](docs/PRODUCT.md)
 - [规则回归：逐题原始结果](docs/reports/rule-regression.md)

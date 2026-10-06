@@ -4,3 +4,4 @@ node_modules/
 .demo-build/
 .runtime/
 *.log
+docs/demo/rendered/
